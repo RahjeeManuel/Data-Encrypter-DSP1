@@ -1,18 +1,18 @@
-#ifndef NODE_HPP
-#define NODE_HPP
+#ifndef HASHNODE_HPP
+#define HASHNODE_HPP
 #include <string>
-class Node {
+class HashNode {
     private:
         std::string userId;
         std::string password;
-        Node* nextNode;
+        HashNode* nextNode;
     public:
-        Node(std::string userId, std::string password);
+        HashNode(std::string userId, std::string password);
         void setUserId(std::string userId);
         void setPassword(std::string password);
-        void setNextNode(Node* nextNode);
+        void setNextNode(HashNode* nextNode);
         std::string getUserId();
         std::string getPassword();
-        Node* getNextNode();
+        HashNode* getNextNode();
 };
 #endif
