@@ -2,16 +2,15 @@
 std::string DataEncrypter::getExtendedKey(std::string password) {
     if (password.size() <= CIPHER_KEY.size()) {
         return CIPHER_KEY;
-    } else {
-        int sizeDifference = password.size() - CIPHER_KEY.size();
-        std::string extendedKey = CIPHER_KEY;
-        while (sizeDifference >= CIPHER_KEY.size()) {
-            extendedKey += extendedKey;
-            sizeDifference -= CIPHER_KEY.size();
-        }
-        extendedKey += extendedKey.substr(0, sizeDifference);
-        return extendedKey;
     }
+    int sizeDifference = password.size() - CIPHER_KEY.size();
+    std::string extendedKey = CIPHER_KEY;
+    while (sizeDifference >= CIPHER_KEY.size()) {
+        extendedKey += extendedKey;
+        sizeDifference -= CIPHER_KEY.size();
+    }
+    extendedKey += extendedKey.substr(0, sizeDifference);
+    return extendedKey;
 }
 std::string DataEncrypter::generateRandomPassword() {
     std::string password;

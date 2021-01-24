@@ -1,13 +1,19 @@
 #ifndef HASHTABLE_HPP
 #define HASHTABLE_HPP
-#include "Node.hpp"
-#include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include "HashNode.hpp"
 class HashTable {
     private:
         const int TABLE_SIZE = 85009;
-        Node** table;
+        HashNode** table;
+        int hashUserId(std::string userId);
     public:
         HashTable();
         ~HashTable();
+        void importData(std::string inputFileName);
+        void insertNode(std::string userId, std::string password);
+        HashNode* searchNode(std::string userId);
 };
 #endif
