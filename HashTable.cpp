@@ -37,6 +37,7 @@ void HashTable::importData(std::string inputFileName) {
         inFile.close();
     } else {
         std::cout << inputFileName << " could not be opened." << std::endl;
+        exit (EXIT_FAILURE);
     }
 }
 void HashTable::insertNode(std::string userId, std::string password) {

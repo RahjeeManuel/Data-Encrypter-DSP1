@@ -58,10 +58,12 @@ void DataEncrypter::exportData(std::string inputFileName, bool encrypt) {
             }
             outFile.close();
         } else {
-           std::cout << (encrypt ? ENCRYPTED_FILE : RAW_FILE) << " could not be opened." << std::endl; 
+           std::cout << (encrypt ? ENCRYPTED_FILE : RAW_FILE) << " could not be opened." << std::endl;
+           exit (EXIT_FAILURE);
         }
         inFile.close();
     } else {
         std::cout << inputFileName << " could not be opened." << std::endl;
+        exit (EXIT_FAILURE);
     }
 }
