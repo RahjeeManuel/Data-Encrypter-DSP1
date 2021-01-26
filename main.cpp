@@ -1,6 +1,6 @@
+#include <vector>
 #include "DataEncrypter.hpp"
 #include "HashTable.hpp"
-
 int main() {
     //Creates .txt files
     DataEncrypter de;
@@ -12,7 +12,7 @@ int main() {
     ht.importData("encrypted.txt"); //reads encryped.txt and creates a hash table
     
     //creates creates a pair<userId, password> vector from raw.txt
-    std::ifstream inFile("raw.txt"));
+    std::ifstream inFile("raw.txt");
     std::vector<std::pair<std::string, std::string> > dataEntries;
     if (inFile.is_open()) {
         int counter = 0;
@@ -34,9 +34,9 @@ int main() {
     std::cout << std::setw(15) << std::left << "Userid" << std::setw(15) << std::left << "Password" << "Result" << std::endl;
 
     //hashes each userid from the pair vector and compares the entry's password with the hashtable's password
-    for (int i = 0; i < entryLoginData.size(); i++) {
-        std::string userId = entryLoginData[i].first;
-        std::string rawPassword = entryLoginData[i].second;
+    for (int i = 0; i < dataEntries.size(); i++) {
+        std::string userId = dataEntries[i].first;
+        std::string rawPassword = dataEntries[i].second;
         std::string encryptedPassword = de.encryptPassword(rawPassword);    //encrypts the plain text password
         std::string hashTablePassword = ht.searchNode(userId)->getPassword();   //gets the encrypted password from the hash table
         std::cout 
@@ -50,10 +50,10 @@ int main() {
     std::cout << std::setw(15) << std::left << "Userid" << std::setw(15) << std::left << "Password" << "Result" << std::endl;
 
     //changes one letter in the unencrypted password then checks if it matches the password in the hashtable
-    for (int i = 0; i < entryLoginData.size(); i++) {
-        std::string userId = entryLoginData[i].first;
-        std::string rawPassword = entryLoginData[i].second;
-        rawPassword = rawPassword[0] = 'x'; //changes one letter in the plaintext password
+    for (int i = 0; i < dataEntries.size(); i++) {
+        std::string userId = dataEntries[i].first;
+        std::string rawPassword = dataEntries[i].second;
+        rawPassword[0] = 'x'; //changes the first letter in the plaintext password to x
         std::string encryptedPassword = de.encryptPassword(rawPassword);    //encrypts the changed password
         std::string hashTablePassword = ht.searchNode(userId)->getPassword();   //gets the encrypted password from the hash table
         std::cout 

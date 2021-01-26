@@ -6,6 +6,21 @@ int HashTable::hashUserId(std::string userId) {
     }
     return hash % TABLE_SIZE;
 }
+void HashTable::insertNode(std::string userId, std::string password) {
+    int hash = hashUserId(userId);
+    HashNode* currentNode = table[hash];
+    HashNode* previousNode = nullptr;
+    while (currentNode != nullptr) {
+        previousNode = currentNode;
+        currentNode = currentNode->getNextNode();
+    }
+    currentNode = new HashNode(userId, password);
+    if (previousNode == nullptr) {
+        table[hash] = currentNode;
+    } else {
+        previousNode->setNextNode(currentNode);     
+    }
+}
 HashTable::HashTable() {
     table = new HashNode*[TABLE_SIZE];
     for (int i = 0; i < TABLE_SIZE; i++) {
@@ -38,21 +53,6 @@ void HashTable::importData(std::string inputFileName) {
     } else {
         std::cout << inputFileName << " could not be opened." << std::endl;
         exit (EXIT_FAILURE);
-    }
-}
-void HashTable::insertNode(std::string userId, std::string password) {
-    int hash = hashUserId(userId);
-    HashNode* currentNode = table[hash];
-    HashNode* previousNode = nullptr;
-    while (currentNode != nullptr) {
-        previousNode = currentNode;
-        currentNode = currentNode->getNextNode();
-    }
-    currentNode = new HashNode(userId, password);
-    if (previousNode == nullptr) {
-        table[hash] = currentNode;
-    } else {
-        previousNode->setNextNode(currentNode);     
     }
 }
 HashNode* HashTable::searchNode(std::string userId) {
