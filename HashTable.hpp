@@ -9,7 +9,7 @@ class HashTable {
         const int TABLE_SIZE = 85009;
         HashNode** table;
         int hashUserId(std::string userId);
-                void insertNode(std::string userId, std::string password);
+        void insertNode(std::string userId, std::string password);
     public:
         HashTable();
         ~HashTable();
